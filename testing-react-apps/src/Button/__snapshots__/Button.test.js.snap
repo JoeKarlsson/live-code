@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Snapshot test match the snapshot 1`] = `
+<button
+  className="newclassname"
+  id="react-button"
+  onClick={[Function]}
+>
+  Multiply
+  Joe Rules
+</button>
+`;

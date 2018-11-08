@@ -1,0 +1,16 @@
+version: '2'
+# Define the services/containers to be run
+services:
+  graphql-workshop: #name of your service
+    build: ./ # specify the directory of the Dockerfile
+    ports:
+      - "3000:3000" #specify ports forwarding
+    links:
+      - database # link this service to the database service
+    volumes:
+      - .:/home/app/graphqlWorkshop
+    depends_on:
+      - database
+
+  database: # name of the service
+    image: mongo # specify image to build container from
