@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Big FOR loop</title>
+
+    <script>
+        var worker;
+        function startWorker() {
+            if (typeof (Worker) !== "undefined") {
+                if (typeof (worker) == "undefined") {
+                    worker = new Worker('/js/bigLoop.js');
+                }
+                worker.onmessage = function (event) {
+                    document.getElementById("result").innerHTML = "Completed " + event.data + " iterations"
+                };
+
+                worker.onerror = function (event) {
+                    console.log(event.message, event);
+                };
+            } else {
+                document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
+            }
+        }
+        
+        function stopWorker() {
+            worker.terminate();
+            worker = undefined;
+        }
+
+        function sayHello() {
+            alert("Hello sir....");
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+    <input type="button" onclick="sayHello();" value="Say Hello" />
+    <output id="result"></output>
+</body>
+
+</html>

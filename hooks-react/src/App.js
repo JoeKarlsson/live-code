@@ -5,6 +5,7 @@ console.log("useState", useState);
 
 function Example() {
   // Declare a new state variable, which we'll call "count"
+  console.log("useState(0)", useState(0));
   const [count, setCount] = useState(0);
 
   return (
@@ -22,6 +23,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Example />
+          <ExampleTwo />
         </header>
       </div>
     );
