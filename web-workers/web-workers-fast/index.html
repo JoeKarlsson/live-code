@@ -1,25 +1,38 @@
 <!DOCTYPE HTML>
-
 <html>
-
 <head>
-    <title>Big FOR loop</title>
-
+    <title>Fast Big FOR Loop</title>
     <script>
         var worker;
         function startWorker() {
+            // check whether the user's browser supports it
             if (typeof (Worker) !== "undefined") {
+                // check if the worker already exists
                 if (typeof (worker) == "undefined") {
                     worker = new Worker('/js/bigLoop.js');
                 }
                 worker.onmessage = function (event) {
-                    document.getElementById("result").innerHTML = "Completed " + event.data + " iterations";
-                    worker.terminate();
+                    console.log('event', event);
+                    
+                    switch(event.data.type) {
+                        case "status":
+                            document.getElementById("status").innerHTML = "Currently on the " + event.data.data + "th iteration";
+                            break;
+                        case "complete":
+                            document.getElementById("result").innerHTML = "Completed " + event.data.data + " iterations";
+                            stopWorker();
+                            break;
+                        default:
+                            stopWorker();
+                            break;
+                    }
                 };
 
                 worker.onerror = function (event) {
-                    console.log(event.message, event);
+                    console.error(event.message, event);
+                    worker.terminate();
                 };
+
             } else {
                 document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
             }
@@ -40,6 +53,7 @@
     <button onclick="startWorker()">Start Worker</button>
     <button onclick="stopWorker()">Stop Worker</button>
     <input type="button" onclick="sayHello();" value="Say Hello" />
+    <output id="status"></output>
     <output id="result"></output>
 </body>
 

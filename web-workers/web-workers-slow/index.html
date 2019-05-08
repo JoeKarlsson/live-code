@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Big FOR loop</title>
+    <title>Slow Big FOR Loop</title>
     <script>
         const startLoop = () => {
             const iterations = 10000000001;
@@ -10,6 +10,10 @@
             }
             document.getElementById("result").innerHTML = "Completed " + iterations + " iterations"
         }
+
+        function sayHello() {
+                alert("Hello sir....");
+            }
     </script>
 </head>
 

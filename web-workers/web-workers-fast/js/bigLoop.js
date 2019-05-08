@@ -1,8 +1,10 @@
-console.log('hit');
+// importScripts('../relative/path/lib.min.js', '../../other/lib.js');
 
-for (var i = 0; i <= 10000001; i += 1) {
+for (var i = 0; i <= 20000001; i += 1) {
    var j = i;
+   if(i%8000 === 0 ) {
+      postMessage({ type: 'status', data: j });
+   }
 }
-console.log('j', j);
 
-postMessage(j);
+postMessage({ type: 'complete', data: j});
