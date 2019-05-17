@@ -12,7 +12,6 @@
                     worker = new Worker('/js/bigLoop.js');
                 }
                 worker.onmessage = function (event) {
-                    console.log('event', event);
                     
                     switch(event.data.type) {
                         case "status":
@@ -20,6 +19,8 @@
                             break;
                         case "complete":
                             document.getElementById("result").innerHTML = "Completed " + event.data.data + " iterations";
+                            document.getElementById("status").innerHTML = "";
+
                             stopWorker();
                             break;
                         default:
@@ -30,7 +31,7 @@
 
                 worker.onerror = function (event) {
                     console.error(event.message, event);
-                    worker.terminate();
+                    stopWorker();
                 };
 
             } else {
@@ -44,7 +45,7 @@
         }
 
         function sayHello() {
-            alert("Hello sir....");
+            alert("Hello y'all....");
         }
     </script>
 </head>
